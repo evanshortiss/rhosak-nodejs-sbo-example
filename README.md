@@ -136,6 +136,8 @@ npm run dev
 During development the information used to connect to Kafka is printed on
 startup.
 
+_NOTE: These are sensitive credentials. Do not share them. This image is provided as an example of output._
+
 ![Application running locally](images/local-development.png)
 
 ## Building an Image
