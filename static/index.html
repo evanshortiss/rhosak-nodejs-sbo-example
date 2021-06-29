@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenShift Streams - Node.js Producer</title>
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    select {
+      background: url(/ice-cream.png) 96% / 24px no-repeat #fff;
+    }
+  </style>
+</head>
+
+<body class="h-screen bg-yellow-100">
+  <div class="flex flex-col h-5/6 align-center justify-center sm:5/6 md:2/3 lg:w-1/3 w-5/6 m-auto">
+    <form method="POST" name="order" action="/order" class="bg-white shadow-md rounded-md px-8 pt-6 pb-8 mb-4">
+      <h2 class="text-3xl text-center text-gray-700 pb-4">Franz's Ice Cream</h2>
+      <div class="flex flex-row">
+        <div class="mb-4 sm:w-3/4 md:w-3/4 w-3/4 mr-4">
+          <label class="block text-gray-500 text-sm font-semibold mb-2" for="product">
+            Flavour
+          </label>
+          <select name="product" class="appearance-none rounded border w-full p-2 text-gray-700 focus:outline-none focus:shadow-outline shadow">
+            <option value="banana">Banana</option>
+            <option value="mint">Mint</option>
+            <option value="strawberry">Strawberry</option>
+          </select>
+        </div>
+        <div class="mb-4 sm:w-1/4 md:w-1/4 w-1/4">
+          <label class="block text-gray-500 text-sm font-semibold mb-2" for="quantity">
+            Quantity
+          </label>
+          <input
+            style="line-height: 24px;"
+            class="shadow w-full appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            name="quantity" type="text" value="1" pattern="[1-9]">
+        </div>
+      </div>
+      <div class="mb-6">
+        <label class="block text-gray-500 text-sm font-semibold mb-2" for="quantity">
+          Receipt Email
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+          name="email" type="email" value="franz@example.com">
+      </div>
+      <div class="flex items-center justify-center">
+        <input
+          class="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          type="submit" value="Place Order">
+        </input>
+      </div>
+    </form>
+
+    <div class="text-gray-500 text-center text-sm">Icon made by <a href="https://www.flaticon.com/authors/good-ware"
+        title="Good Ware">Good Ware</a> from <a href="https://www.flaticon.com/" class="underline" title="Flaticon">www.flaticon.com</a>
+    </div>
+  </div>
+
+
+  <script>
+    document.forms.order.elements[0].onchange = function (e) {
+      const mapping = {
+        banana: 'yellow',
+        mint: 'green',
+        strawberry: 'red'
+      }
+
+      for (k in mapping) {
+        document.body.classList.remove(`bg-${mapping[k]}-100`)
+      }
+
+      document.body.classList.add(`bg-${mapping[this.value]}-100`)
+    }
+    document.forms.order.onsubmit = function (e) {
+      const unfilled = Array.from(document.forms.order.elements).find(el => {
+        if (el.type !== 'submit' && !el.value) {
+          return true
+        }
+      })
+
+      if (unfilled) {
+        console.log('Form is not filled. Cancelling submission')
+        alert('Please provide a value for ' + unfilled.name + '.')
+        return false
+      }
+    }
+  </script>
+</body>
+
+</html>
