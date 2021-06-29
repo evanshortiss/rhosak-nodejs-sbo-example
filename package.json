@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "SERVICE_BINDING_ROOT=.bindingroot/ LOG_LEVEL=debug node src/index.js | pino-pretty -t",
-    "start": "node -e 'setTimeout(() => {}, 1000000000)'",
+    "start": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
