@@ -38,7 +38,7 @@ module.exports = (log, producer) => {
     const orderId = nanoid()
 
     try {
-      const key = `${email}:${orderId}`
+      const key = email
       const value = JSON.stringify({ ...req.body, orderId })
 
       log.info(`producing order "${key}" to kafka: %j`, value)
