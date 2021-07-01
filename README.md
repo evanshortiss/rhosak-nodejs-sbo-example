@@ -9,6 +9,15 @@ injected into the application using
 the [kube-service-bindings](https://github.com/nodeshift/kube-service-bindings)
 Node.js module is used to read the bindings.
 
+<div align="center">
+	<br>
+    <img style="max-width: 600px;" src="images/rhoas-service-binding.png"/>
+	<br>
+  <i>A high-level summary of Service Binding with Red Hat OpenShift Streams for Apache Kafka.</i>
+  <br>
+  <br>
+</div>
+
 ## Requirements
 
 * Red Hat Cloud Account (Sign-up on the [cloud.redhat.com](https://cloud.redhat.com) Log-in page)
