@@ -52,13 +52,13 @@ Use the RHOAS CLI to create and configure a managed Kafka instance:
 rhoas login
 
 # Create a kafka by following the prompts
-rhoas kafka create my-kafka
+rhoas kafka create --name my-kafka
 
 # Select a Kafka instance to use for future commands
 rhoas kafka use
 
 # Create the topic used by the application
-rhoas kafka topic create orders
+rhoas kafka topic create --name orders --partitions 3
 ```
 
 ### Deploy on OpenShift
@@ -96,6 +96,9 @@ Bindings can be configured using the
 ```bash
 # Login using the browser-based flow
 rhoas login
+
+# Select a Kafka instance to use for future commands
+rhoas kafka use
 
 # Link your OpenShift/Kubernetes project/namespace to the Kafka
 rhoas cluster connect
