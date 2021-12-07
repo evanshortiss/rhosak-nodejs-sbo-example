@@ -21,10 +21,11 @@ Node.js module is used to read the bindings.
 ## Requirements
 
 * Red Hat Cloud Account (Sign-up on the [cloud.redhat.com](https://cloud.redhat.com) Log-in page)
-* OpenShift >= v4 (use [OpenShift Developer Sandbox](https://developers.redhat.com/developer-sandbox) for free!)
+* OpenShift >= v4.x (use [OpenShift Developer Sandbox](https://developers.redhat.com/developer-sandbox) for free!)
 * Node.js >= v12
-* [OpenShift CLI](https://mirror.openshift.com/pub/openshift-v4/clients/ocp/stable/)
+* [OpenShift CLI v4.x](https://mirror.openshift.com/pub/openshift-v4/clients/ocp/stable/)
 * [Red Hat OpenShift Application Services Operator](https://github.com/redhat-developer/app-services-operator) (pre-installed on [OpenShift Developer Sandbox](https://developers.redhat.com/developer-sandbox))
+* [Service Binding Operator](https://github.com/redhat-developer/service-binding-operator) (pre-installed on [OpenShift Developer Sandbox](https://developers.redhat.com/developer-sandbox))
 * [Red Hat OpenShift Application Services CLI](https://github.com/redhat-developer/app-services-cli)
 
 ## Deployment
@@ -99,21 +100,51 @@ rhoas login
 
 # Link your OpenShift/Kubernetes project/namespace to the Kafka
 rhoas cluster connect
+```
 
-# Bind your Kafka to a Deployment
+A new Managed Kafka icon will appear in your application Topology View on
+OpenShift.
+
+You'll need to bind this to your Node.js application, but first you need to
+configure RBAC for the Service Account that was created by the
+`rhoas cluster connect` command. Service Accounts have limited access by
+default, and therefore cannot read/write from/to Kafka Topics. The Service
+Account ID should have been printed by the `rhoas cluster connect` command,
+but you can find it in the OpenShift Streams UI or using the
+`rhoas service-account list` command.
+
+Use the following commands to provide liberal permissions to your Service
+Account. These loose permissions *are not* recommended in production.
+
+```bash
+# Replace with your service account ID!
+export SERVICE_ACCOUNT_ID="srvc-acct-replace-me"
+
+rhoas kafka acl grant-access --producer --consumer \
+--service-account $SERVICE_ACCOUNT_ID --topic all --group all
+```
+
+Now, create a Service Binding between your Managed Kafka and Node.js `producer`
+application.
+
+```bash
 rhoas cluster bind
 ```
 
-The application will now start. Use the following command to get the
-application URL!
+The Node.js application should restart and stay in a health state, surrounded
+by a blue ring as shown in the Topology View.
+
+![Application Running on OpenShift](images/application-running.png)
+
+Use the following command to get the application URL!
 
 ```bash
-oc get route producer -o jsonpath='{.spec.host}
+oc get route producer -o jsonpath='{.spec.host}'
 ```
 
 Now you can submit an order via browser. The order is placed into the `orders` topic in your Kafka instance.
 
-![Application Crashing on OpenShift](images/order.png)
+![Node.js Application UI](images/order.png)
 
 ### Develop Locally
 
