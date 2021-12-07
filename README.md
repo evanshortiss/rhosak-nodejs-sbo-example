@@ -25,7 +25,7 @@ Node.js module is used to read the bindings.
 * Node.js >= v12
 * [OpenShift CLI v4.x](https://mirror.openshift.com/pub/openshift-v4/clients/ocp/stable/)
 
-### OpenShift Cluster (free options available)
+### OpenShift Account & Cluster (free options available)
 
 * Red Hat Cloud Account (Sign-up on the [cloud.redhat.com](https://cloud.redhat.com) Log-in page)
 * OpenShift >= v4.x (use [OpenShift Developer Sandbox](https://developers.redhat.com/developer-sandbox) for free!)
