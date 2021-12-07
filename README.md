@@ -20,10 +20,15 @@ Node.js module is used to read the bindings.
 
 ## Requirements
 
-* Red Hat Cloud Account (Sign-up on the [cloud.redhat.com](https://cloud.redhat.com) Log-in page)
-* OpenShift >= v4.x (use [OpenShift Developer Sandbox](https://developers.redhat.com/developer-sandbox) for free!)
+### CLI Tooling
+
 * Node.js >= v12
 * [OpenShift CLI v4.x](https://mirror.openshift.com/pub/openshift-v4/clients/ocp/stable/)
+
+### OpenShift Cluster (free options available)
+
+* Red Hat Cloud Account (Sign-up on the [cloud.redhat.com](https://cloud.redhat.com) Log-in page)
+* OpenShift >= v4.x (use [OpenShift Developer Sandbox](https://developers.redhat.com/developer-sandbox) for free!)
 * [Red Hat OpenShift Application Services Operator](https://github.com/redhat-developer/app-services-operator) (pre-installed on [OpenShift Developer Sandbox](https://developers.redhat.com/developer-sandbox))
 * [Service Binding Operator](https://github.com/redhat-developer/service-binding-operator) (pre-installed on [OpenShift Developer Sandbox](https://developers.redhat.com/developer-sandbox))
 * [Red Hat OpenShift Application Services CLI](https://github.com/redhat-developer/app-services-cli)
